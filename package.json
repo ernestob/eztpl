@@ -1,0 +1,40 @@
+{
+    "name": "eztpl",
+    "displayName": "eZPublish",
+    "description": "eZ Publish template syntax",
+    "version": "0.0.2",
+    "publisher": "",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "keywords": [
+        "eZ Publish",
+        "ezp",
+        "tpl",
+        "syntax",
+        "highlight"
+    ],
+    "categories": [
+        "Languages",
+        "Snippets"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "eztpl",
+            "aliases": ["eZ Publish Template", "eztpl"],
+            "extensions": [".tpl"],
+            "configuration": "./eztpl.configuration.json"
+        }],
+        "grammars": [{
+            "language": "eztpl",
+            "scopeName": "text.html.eztpl",
+            "path": "./syntaxes/eztpl.tmLanguage"
+        }],
+        "snippets": [
+            {
+                "language": "eztpl",
+                "path": "./snippets/eztpl.json"
+            }
+        ]
+    }
+}

@@ -1,0 +1,1423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>comment</key>
+    <string>
+        eZ Publish template
+        TODO:
+        - whatever is inside {literal} is not parsed
+            - Add javascript
+            - Add CSS
+        - max only on foreach
+        - Comments
+            - add options for marked
+        - Notes:
+            -- ################   Foreground's   ################
+            -- support  purpple
+            -- ################   Background's   ################
+            -- invalid.illegal purple
+            -- meta.separator, meta.diff, meta.diff.header blue
+            -- markup.deleted red
+            -- markup.changed yellow
+            -- markup.inserted green
+            -- "text source" silver
+            -- "text.html.ruby source" silver bright
+    </string>
+    <key>fileTypes</key>
+    <array>
+        <string>tpl</string>
+    </array>
+    <key>foldingStartMarker</key>
+    <string>({(section|let|if|else|elseif|foreach|for|while|switch|case|cache-block|run-once|literal|delimiter))</string>
+    <key>foldingStopMarker</key>
+    <string>({\/(section|let|if|else|elseif|foreach|for|while|switch|case|cache-block|run-once|literal|delimiter)\\s*})</string>
+    <key>injections</key>
+    <dict>
+        <key>text.html.eztpl - (meta.embedded | meta.tag | comment.block), L:text.html.eztpl meta.tag</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-comment-tags</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-code</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-literal</string>
+                </dict>
+            </array>
+        </dict>
+    </dict>
+
+    <key>name</key>
+    <string>eZ template</string>
+    <key>patterns</key>
+    <array>
+        <dict>
+            <key>include</key>
+            <string>text.html.basic</string>
+        </dict>
+    </array>
+
+    <key>repository</key>
+    <dict>
+
+        <!-- ez-literal -->
+        <key>ez-literal</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>begin</key>
+                    <string>{literal</string>
+                    <key>end</key>
+                    <string>{\/literal</string>
+                    <key>include</key>
+                    <string>text.html.basic</string>
+                </dict>
+            </array>
+        </dict>
+        <!-- END ez-literal -->
+
+        <!-- from smarty -->
+        <key>ez-code</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>begin</key>
+                    <string>(\{)</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>source.eztpl</string>
+                        </dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.section.embedded.begin.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>contentName</key>
+                    <string>source.eztpl</string>
+                    <key>end</key>
+                    <string>(\})</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>source.eztpl</string>
+                        </dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.section.embedded.end.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>name</key>
+                    <string>meta.embedded.line.tag.eztpl</string>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-strings</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-variables3</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-keywords</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-keywords-deprecated</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-functions</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-functions-incomplete</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-operators</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-constants</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-arrays</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#ez-literal</string>
+                        </dict>
+                    </array>
+                </dict>
+            </array>
+        </dict>
+
+        <key>lang-tmp</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <!-- eZ START -->
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-keywords</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-keywords-deprecated</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-variables</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-constants</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-strings</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-functions</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-functions-incomplete</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-operators</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-arrays</string>
+                </dict>
+
+                <!-- eZ END -->
+
+            </array>
+        </dict>
+        <!-- END ez-code -->
+
+        <!-- KEYWORDS -->
+        <key>ez-keywords</key>
+        <dict>
+            <key>match</key>
+            <string>(?x)
+                \b(
+                    # Control structures
+                    if
+                    |else
+                    |elseif
+                    |switch
+                    |case
+                    |do
+                    |break
+                    |continue
+                    |skip
+                        |sequence
+                        |as
+                    |for
+                    |delimiter
+                    |foreach
+                        |offset
+                        |max
+                        |reverse
+                    |while
+                    # END Control structures
+
+                    # Debugging
+                    |debug-accumulator
+                    |debug-log
+                    |debug-timing-point
+                    |debug-trace
+                    # END Debugging
+
+                    # Miscellaneous
+                    |cache-block
+                        |keys
+                        |subtree_expiry
+                    |fetch_alias
+                    |include
+                    |ldelim
+                    |literal
+                    |rdelim
+                    |run-once
+                    # END Miscellaneous
+
+                    # Variables
+                    |append-block
+                    |def
+                    |default
+                    |let
+                    |sequence
+                    |set
+                    |set-block
+                    |undef
+                    # END Variables
+
+                    # Visualization
+                    |attribute_edit_gui
+                    |attribute_result_gui
+                    |attribute_view_gui
+                    |class_attribute_edit_gui
+                    |class_attribute_view_gui
+                    |collaboration_icon
+                    |collaboration_participation_view
+                    |collaboration_simple_message_view
+                    |collaboration_view_gui
+                    |content_version_view_gui
+                    |content_view_gui
+                    |event_edit_gui
+                    |node_view_gui
+                    |related_view_gui
+                    |shop_account_view_gui
+                    |tool_bar
+                        |view
+                        |content_node
+                    # END Visualization
+
+                    # Visualitation eZFlow
+                    |block_view_gui
+                    |block
+                    # END Visualitation eZFlow
+                )\b</string>
+            <key>name</key>
+            <string>keyword.control.eztpl</string>
+        </dict>
+        <!--
+            |cond|eq|gt|lt|ne|true|not|false
+        -->
+        <!-- END KEYWORDS -->
+
+        <!-- KEYWORDS Deprecated -->
+        <key>ez-keywords-deprecated</key>
+        <dict>
+            <key>match</key>
+            <string>(?x)
+                \b(
+                    # Control structures
+                    section
+                    |section-end
+                    # END Control structures
+
+                    # Visualization
+                    |attribute_pdf_gui
+                    |content_pdf_gui
+                    # END Visualization
+                )\b</string>
+            <key>name</key>
+            <string>invalid.illegal.deprecated.eztpl</string>
+        </dict>
+        <!-- END KEYWORDS Deprecated -->
+
+        <!-- FUNCTIONS -->
+        <key>ez-functions</key>
+        <dict>
+            <key>begin</key>
+            <string>(?x)
+                (?&lt;![.])
+                \b(
+                    abs
+                    |action_icon
+                    |alias
+                    |and
+                    |append
+                    |append_block
+                    |array
+                    |array_sum
+                    |as
+                    |attribute
+                    |attribute_edit_gui
+                    |attribute_pdf_gui
+                    |attribute_result_gui
+                    |attribute_view_gui
+                    |autolink
+                    |begins_with
+                    |by
+                    |cache-block
+                    |capture
+                    |ceil
+                    |choose
+                    |chr
+                    |class_attribute_edit_gui
+                    |class_attribute_view_gui
+                    |classgroup_icon
+                    |collaboration_icon
+                    |collaboration_participation_view
+                    |collaboration_simple_message_view
+                    |collaboration_view_gui
+                    |compare
+                    |concat
+                    |cond
+                    |config_load
+                    |contains
+                    |content_pdf_gui
+                    |content_structure_tree
+                    |content_version_view_gui
+                    |content_view_gui
+                    |count
+                    |count_chars
+                    |count_words
+                    |crc32
+                    |currentdate
+                    |cycle
+                    |date_format
+                    |datetime
+                    |debug-accumulator
+                    |debug-log
+                    |debug-timing-point
+                    |debug-trace
+                    |dec
+                    |default
+                    |div
+                    |downcase
+                    |ends_with
+                    |eq
+                    |even
+                    |event_edit_gui
+                    |expiry
+                    |explode
+                    |extract
+                    |extract_left
+                    |extract_right
+                    |exturl
+                    |ezcss
+                    |ezcss_load
+                    |ezcss_require
+                    |ezdesign
+                    |ezhttp
+                    |ezhttp_hasvariable
+                    |ezimage
+                    |ezini
+                    |ezini_hasvariable
+                    |ezpackage
+                    |ezpagedata
+                    |ezpagedata_set
+                    |ezpreference
+                    |ezroot
+                    |ezscript
+                    |ezscript_load
+                    |ezscript_require
+                    |ezsys
+                    |ezurl
+                    |false
+                    |fetch
+                    |fetch_alias
+                    |first_set
+                    |flag_icon
+                    |float
+                    |floor
+                    |ge
+                    |get_class
+                    |get_type
+                    |gettime
+                    |gt
+                    |hash
+                    |html_[a-z_]*
+                    |i18n
+                    |icon_info
+                    |image
+                    |imagefile
+                    |implode
+                    |inc
+                    |indent
+                    |insert
+                    |int
+                    |is_array
+                    |is_boolean
+                    |is_class
+                    |is_float
+                    |is_integer
+                    |is_null
+                    |is_numeric
+                    |is_object
+                    |is_set
+                    |is_string
+                    |is_unset
+                    |l10n
+                    |le
+                    |lt
+                    |makedate
+                    |maketime
+                    |match
+                    |math
+                    |max
+                    |max
+                    |md5
+                    |merge
+                    |mimetype_icon
+                    |min
+                    |mod
+                    |module_params
+                    |month_overview
+                    |mul
+                    |ne
+                    |nl2br
+                    |node_view_gui
+                    |not
+                    |null
+                    |odd
+                    |offset
+                    |or
+                    |or
+                    |ord
+                    |pad
+                    |pdf
+                    |prepend
+                    |rand
+                    |redirect
+                    |related_view_gui
+                    |remove
+                    |repeat
+                    |replace
+                    |reverse
+                    |reverse
+                    |roman
+                    |rot13
+                    |round
+                    |run-once
+                    |sequence
+                    |sequence
+                    |set
+                    |set-block
+                    |shop_account_view_gui
+                    |shorten
+                    |si
+                    |simpletags
+                    |simplify
+                    |string_format
+                    |strip
+                    |strip_tags
+                    |strip_tags
+                    |sub
+                    |sum
+                    |texttoimage
+                    |tool_bar
+                    |topmenu
+                    |treemenu
+                    |trim
+                    |true
+                    |undef
+                    |unique
+                    |upcase
+                    |upfirst
+                    |upword
+                    |urlencode
+                    |rawurlencode
+                    |rawurldecode
+                    |variable
+                    |wash
+                    |wordtoimage
+                    |wrap
+                )(\()
+            </string>
+            <key>settings</key>
+            <dict>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+            <key>beginCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>support.function.eztpl</string>
+                </dict>
+                <key>2</key>
+                <dict>
+                    <key>name</key>
+                    <string>support.function.punctuation.definition.parameters.begin.eztpl</string>
+                </dict>
+            </dict>
+            <key>end</key>
+            <string>\)</string>
+            <key>endCaptures</key>
+            <dict>
+                <key>0</key>
+                <dict>
+                    <key>name</key>
+                    <string>support.function.punctuation.definition.parameters.end.eztpl</string>
+                </dict>
+            </dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-functions</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-functions-incomplete</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-strings</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-operators</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-variables</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-constants</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#ez-arrays</string>
+                </dict>
+
+            </array>
+            <key>contentName</key>
+            <string>support.function.built-in.eztpl</string>
+        </dict>
+        <!-- END-FUNCTIONS -->
+
+        <!-- Spaces in the end -->
+        <key>spaces-in-the-end</key>
+        <dict>
+            <key>match</key>
+            <string>(\s+$)</string>
+            <key>name</key>
+            <string>invalid.illegal.eztpl</string>
+        </dict>
+        <!-- END Spaces in the end -->
+
+        <!-- FUNCTIONS-missin "()" -->
+        <key>ez-functions-incomplete</key>
+        <dict>
+            <key>match</key>
+            <string>(?x)
+                (?&lt;![.])
+                \b(
+                    abs
+                    |action_icon
+                    |alias
+                    |and
+                    |append
+                    |append_block
+                    |array
+                    |array_sum
+                    |as
+                    |attribute
+                    |autolink
+                    |begins_with
+                    |by
+                    |cache-block
+                    |capture
+                    |ceil
+                    |choose
+                    |chr
+                    |classgroup_icon
+                    |collaboration_icon
+                    |collaboration_participation_view
+                    |collaboration_simple_message_view
+                    |collaboration_view_gui
+                    |compare
+                    |concat
+                    |cond
+                    |config_load
+                    |contains
+                    |content_structure_tree
+                    |content_version_view_gui
+                    |count
+                    |count_chars
+                    |count_words
+                    |crc32
+                    |currentdate
+                    |cycle
+                    |date_format
+                    |datetime
+                    |dec
+                    |default
+                    |div
+                    |downcase
+                    |ends_with
+                    |eq
+                    |even
+                    |event_edit_gui
+                    |expiry
+                    |explode
+                    |extract
+                    |extract_left
+                    |extract_right
+                    |exturl
+                    |ezcss
+                    |ezcss_load
+                    |ezcss_require
+                    |ezdesign
+                    |ezhttp
+                    |ezhttp_hasvariable
+                    |ezimage
+                    |ezini
+                    |ezini_hasvariable
+                    |ezpackage
+                    |ezpagedata
+                    |ezpagedata_set
+                    |ezpreference
+                    |ezroot
+                    |ezscript
+                    |ezscript_load
+                    |ezscript_require
+                    |ezsys
+                    |ezurl
+                    |false
+                    |fetch
+                    |fetch_alias
+                    |first_set
+                    |flag_icon
+                    |float
+                    |floor
+                    |ge
+                    |get_class
+                    |get_type
+                    |gettime
+                    |gt
+                    |hash
+                    |html_[a-z_]*
+                    |i18n
+                    |icon_info
+                    |image
+                    |imagefile
+                    |implode
+                    |inc
+                    |indent
+                    |insert
+                    |int
+                    |is_array
+                    |is_boolean
+                    |is_class
+                    |is_float
+                    |is_integer
+                    |is_null
+                    |is_numeric
+                    |is_object
+                    |is_set
+                    |is_string
+                    |is_unset
+                    |l10n
+                    |le
+                    |lt
+                    |makedate
+                    |maketime
+                    |match
+                    |math
+                    |max
+                    |max
+                    |md5
+                    |merge
+                    |mimetype_icon
+                    |min
+                    |mod
+                    |module_params
+                    |month_overview
+                    |mul
+                    |ne
+                    |nl2br
+                    |node_view_gui
+                    |not
+                    |null
+                    |odd
+                    |offset
+                    |or
+                    |or
+                    |ord
+                    |pad
+                    |pdf
+                    |prepend
+                    |rand
+                    |redirect
+                    |related_view_gui
+                    |remove
+                    |repeat
+                    |replace
+                    |roman
+                    |rot13
+                    |round
+                    |run-once
+                    |set
+                    |set-block
+                    |shop_account_view_gui
+                    |shorten
+                    |si
+                    |simpletags
+                    |simplify
+                    |string_format
+                    |strip
+                    |strip_tags
+                    |strip_tags
+                    |sub
+                    |sum
+                    |texttoimage
+                    |tool_bar
+                    |topmenu
+                    |treemenu
+                    |trim
+                    |true
+                    |undef
+                    |unique
+                    |upcase
+                    |upfirst
+                    |upword
+                    |urlencode
+                    |rawurlencode
+                    |rawurldecode
+                    |variable
+                    |wash
+                    |wordtoimage
+                    |wrap
+                )\b(?![=])
+            </string>
+            <key>name</key>
+            <string>invalid.deprecated.eztpl</string>
+        </dict>
+        <!-- END-FUNCTIONS-missin "()" -->
+
+        <!-- eZ CONSTANTS -->
+        <key>ez-constants</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <!-- NUMERIC -->
+                <dict>
+                    <key>comment</key>
+                    <string>match 1, 1.2, .3, 3|mul(3)</string>
+                    <key>match</key>
+                    <string>(?&lt;=[\s\[\(\{:,]|\.\.|\*\*)[0-9]+(?:\.[0-9]+)?(?=[\s\)\]\}\,]|\.\.|\*\*)</string>
+                    <key>name</key>
+                    <string>constant.numeric.eztpl</string>
+                </dict>
+            </array>
+        </dict>
+        <!-- END eZ CONSTANTS -->
+
+        <!-- ez OPERATORS -->
+        <key>ez-operators</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+
+                <!-- PIPE -->
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.control.support.operator.pipe.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(\|)</string>
+                </dict>
+
+                <!-- ASSIGNMENT -->
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.control.operator.assignment.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(=&gt;?)</string>
+                </dict>
+
+                <!-- LOGICAL -->
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.operator.logical.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(\?|:)</string>
+                </dict>
+
+                <!-- CONTROL -->
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.control.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(skip|break|continue|/?delimiter|[lr]delim|/?literal)</string>
+                </dict>
+            </array>
+        </dict>
+
+        <!-- ez-variables -->
+        <key>ez-variables2</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>\b(\$)eztpl\.</string>
+                    <key>name</key>
+                    <string>variable.other.global.eztpl</string>
+                </dict>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.eztpl</string>
+                        </dict>
+                        <key>2</key>
+                        <dict>
+                            <key>name</key>
+                            <string>variable.other.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(\$)([a-zA-Z_][a-zA-Z0-9_]*)\b</string>
+                    <key>name</key>
+                    <string>variable.other.eztpl</string>
+                </dict>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.operator.eztpl</string>
+                        </dict>
+                        <key>2</key>
+                        <dict>
+                            <key>name</key>
+                            <string>variable.other.property.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(-&gt;)([a-zA-Z_][a-zA-Z0-9_]*)\b</string>
+                    <key>name</key>
+                    <string>variable.other.eztpl</string>
+                </dict>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.operator.eztpl</string>
+                        </dict>
+                        <key>2</key>
+                        <dict>
+                            <key>name</key>
+                            <string>meta.function-call.object.eztpl</string>
+                        </dict>
+                        <key>3</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.eztpl</string>
+                        </dict>
+                        <key>4</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(-&gt;)([a-zA-Z_][a-zA-Z0-9_]*)(\().*?(\))</string>
+                    <key>name</key>
+                    <string>variable.other.eztpl</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>ez-variables3</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>comment</key>
+                    <string>match $image.main_node.data_map.image.content['product_thumb'].url</string>
+
+                    <key>match</key>
+                    <string>(?x)
+                        (
+                            (\$+)[a-zA-Z_#][a-zA-Z0-9_\-:\.]*            #2
+                        )
+                        # (?:
+                        #     (\[)                                        #3
+                        #         (?:
+                        #             (\d+)                               #4      # If is a digit
+                        #             | ((\$)([a-zA-Z_][a-zA-Z0-9_\.]*))  #5[6,7] # If is another variable
+                        #             | (['"]\w+['"])                     #8      # If the array has an string
+                        #         )
+                        #     (\])                                        #9
+                        #     ([a-zA-Z0-9_\-:\.]*)                        #10      # After the brackets
+                        # )?
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>variable.other.eztpl</string>
+                        </dict>
+                        <!--
+                        <key>3</key>
+                        <dict>
+                            <key>name</key>
+                            <string>support.operator.pipe.eztpl</string>
+                        </dict>
+                        -->
+                        <!--
+                        <key>5</key>
+                        <dict>
+                            <key>name</key>
+                            <string>variable.eztpl</string>
+                        </dict>
+                        -->
+                        <!--
+                        <key>8</key>
+                        <dict>
+                            <key>name</key>
+                            <string>string.quoted.single.eztpl</string>
+                        </dict>
+                        -->
+                        
+                        <!--
+                        <key>4</key>
+                        <dict>
+                            <key>name</key>
+                            <string>support.operator.pipe.eztpl</string>
+                        </dict>
+                        -->
+                        
+                        <!--
+                        <key>10</key>
+                        <dict>
+                            <key>name</key>
+                            <string>variable.eztpl</string>
+                        </dict>
+                        -->
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+        <!-- From smarty -->
+        <key>ez-variables</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.smarty</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>\b(\$)Smarty\.</string>
+                    <key>name</key>
+                    <string>variable.other.global.smarty</string>
+                </dict>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.smarty</string>
+                        </dict>
+                        <key>2</key>
+                        <dict>
+                            <key>name</key>
+                            <string>variable.other.smarty</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(\$)([a-zA-Z_][a-zA-Z0-9_]*)\b</string>
+                    <key>name</key>
+                    <string>variable.other.smarty</string>
+                </dict>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.operator.smarty</string>
+                        </dict>
+                        <key>2</key>
+                        <dict>
+                            <key>name</key>
+                            <string>variable.other.property.smarty</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(-&gt;)([a-zA-Z_][a-zA-Z0-9_]*)\b</string>
+                    <key>name</key>
+                    <string>variable.other.smarty</string>
+                </dict>
+                <dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.operator.smarty</string>
+                        </dict>
+                        <key>2</key>
+                        <dict>
+                            <key>name</key>
+                            <string>meta.function-call.object.smarty</string>
+                        </dict>
+                        <key>3</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.smarty</string>
+                        </dict>
+                        <key>4</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.variable.smarty</string>
+                        </dict>
+                    </dict>
+                    <key>match</key>
+                    <string>(-&gt;)([a-zA-Z_][a-zA-Z0-9_]*)(\().*?(\))</string>
+                    <key>name</key>
+                    <string>variable.other.smarty</string>
+                </dict>
+            </array>
+        </dict>
+        <!-- END ez-variables -->
+
+        <!-- ARRAYS -->
+        <key>ez-arrays</key>
+        <dict>
+            <key>begin</key>
+            <string>(\[)</string>
+            <key>beginCaptures</key>
+            <dict>
+                <key>0</key>
+                <dict>
+                    <key>name</key>
+                    <string>support.operator.pipe.eztpl</string>
+                </dict>
+            </dict>
+            <key>end</key>
+            <string>(\])</string>
+            <key>endCaptures</key>
+            <dict>
+                <key>0</key>
+                <dict>
+                    <key>name</key>
+                    <string>support.operator.pipe.eztpl</string>
+                </dict>
+            </dict>
+            <key>name</key>
+            <string>meta.array.eztpl</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-strings</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-constants</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-variables</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-functions</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-functions-incomplete</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-operators</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-arrays</string>
+                </dict>
+            </array>
+        </dict>
+        <!-- END Arrays -->
+
+        <!-- COMMENTS -->
+        <key>ez-comment-tags</key>
+        <dict>
+            <key>begin</key>
+            <string>{\*</string>
+            <key>beginCaptures</key>
+            <dict>
+                <key>0</key>
+                <dict>
+                    <key>name</key>
+                    <string>punctuation.definition.comment.begin.eztpl</string>
+                </dict>
+            </dict>
+            <key>end</key>
+            <string>\*}</string>
+            <key>endCaptures</key>
+            <dict>
+                <key>0</key>
+                <dict>
+                    <key>name</key>
+                    <string>punctuation.definition.comment.begin.eztpl</string>
+                </dict>
+            </dict>
+            <key>name</key>
+            <string>comment.block.eztpl</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#spaces-in-the-end</string>
+                </dict>
+            </array>
+        </dict>
+        <!-- END COMMENTS -->
+
+        <!-- HTML COMMENTS -->
+        <key>html-comment-tags</key>
+        <dict>
+            <key>comment</key>
+            <string>Match &lt;!-- comment --&gt;</string>
+            <key>begin</key>
+            <string>&lt;!--</string>
+            <key>captures</key>
+            <dict>
+                <key>0</key>
+                <dict>
+                    <key>name</key>
+                    <string>text.html.ruby source punctuation.definition.comment.html</string>
+                </dict>
+            </dict>
+            <key>end</key>
+            <string>--&gt;</string>
+            <key>name</key>
+            <string>text.html.ruby source comment.block.html</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#spaces-in-the-end</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#ez-code</string>
+                </dict>
+
+            </array>
+        </dict>
+        <!-- END HTML COMMENTS -->
+
+        <!-- STRINGS -->
+        <key>ez-strings</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>begin</key>
+                    <string>'</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.begin.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>end</key>
+                    <string>'</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.end.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>name</key>
+                    <string>string.quoted.single.eztpl</string>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>match</key>
+                            <string>\\.</string>
+                            <key>name</key>
+                            <string>constant.character.escape.eztpl</string>
+                        </dict>
+                    </array>
+                </dict>
+                <dict>
+                    <key>begin</key>
+                    <string>"</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.begin.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>end</key>
+                    <string>"</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.end.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>name</key>
+                    <string>string.quoted.double.eztpl</string>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>match</key>
+                            <string>\\.</string>
+                            <key>name</key>
+                            <string>constant.character.escape.eztpl</string>
+                        </dict>
+                    </array>
+                </dict>
+            </array>
+        </dict>
+
+        <key>ez-strings2</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <!-- SINGLE QUOTED STRINGS -->
+                <dict>
+                    <key>begin</key>
+                    <string>(?:(?&lt;!\\)|(?&lt;=\\\\))'</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.begin.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>end</key>
+                    <string>(?:(?&lt;!\\)|(?&lt;=\\\\))'</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.end.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>name</key>
+                    <string>string.quoted.single.eztpl</string>
+                </dict>
+
+                <!-- DOUBLE QUOTED STRINGS -->
+                <dict>
+                    <key>begin</key>
+                    <string>(?:(?&lt;!\\)|(?&lt;=\\\\))"</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.begin.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>end</key>
+                    <string>(?:(?&lt;!\\)|(?&lt;=\\\\))"</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.definition.string.end.eztpl</string>
+                        </dict>
+                    </dict>
+                    <key>name</key>
+                    <string>string.quoted.double.eztpl</string>
+                </dict>
+            </array>
+        </dict>
+        <!-- STRINGS -->
+
+        <!-- HTML -->
+        <key>html-source</key>
+        <dict>
+            <key>include</key>
+            <string>text.html.basic</string>
+        </dict>
+        <!-- html -->
+
+    </dict>
+    <key>scopeName</key>
+    <string>text.html.eztpl</string>
+    <key>uuid</key>
+    <string>D2F9659B-35E2-419A-BF40-068AC1F8275D</string>
+</dict>
+</plist>
